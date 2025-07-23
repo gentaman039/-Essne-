@@ -2,23 +2,40 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>URLジャンプページ</title>
+  <title>サイトビューア</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    #inputArea {
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    #viewer {
+      width: 100%;
+      height: 90vh;
+      border: none;
+    }
+  </style>
 </head>
-<body style="font-family: sans-serif; text-align: center; padding: 20px;">
-  <h2>URLジャンプ</h2>
-  <p>アクセスしたいWebサイトのURLを入力してください。</p>
-  <input id="url" type="text" placeholder="https://example.com" style="width: 80%; padding: 8px;" />
-  <br><br>
-  <button onclick="jump()" style="padding: 10px 20px; font-size: 16px;">移動</button>
+<body>
+  <div id="inputArea">
+    <h2>Webサイトを表示</h2>
+    <input id="urlInput" type="text" placeholder="https://example.com" style="width: 70%; padding: 8px;" />
+    <button onclick="loadSite()" style="padding: 8px 16px;">表示</button>
+  </div>
+  <iframe id="viewer" src=""></iframe>
 
   <script>
-    function jump() {
-      let url = document.getElementById('url').value.trim();
-      if (!url.startsWith('http://') && !url.startsWith('https://')) {
-        url = 'https://' + url;
+    function loadSite() {
+      let url = document.getElementById('urlInput').value.trim();
+      if (!url.startsWith("http")) {
+        url = "https://" + url;
       }
-      location.href = url;
+      document.getElementById('viewer').src = url;
     }
   </script>
 </body>
